@@ -16,8 +16,15 @@ function startChecking() {
     console.log(`found ${sourceArray.length} of items`)
     sourceArray.forEach(
         (value) => {
-            if(targetArray.indexOf(value) >=0 )
+            if(targetArray.indexOf(value) >=0 ) {
                 console.error('target found',value)
+                console.log('axiosaxios')
+                let resp = axios.post('api_endpoint', {
+                to: 'target email',
+                subject: value+' found',
+                body: window.location.href
+              });
+            }
         }
     )
     console.log('checking end')
@@ -34,8 +41,9 @@ function loadNextPage() {
     }
 }
 
+
 function reload() {
-    window.location.reload()
+    // window.location.reload()
 }
 
 let intervalId;
@@ -46,3 +54,5 @@ if (window.location.host === "www.hermes.com") {
     intervalId = setInterval (loadNextPage,1942) 
     setTimeout (reload,13456)
 }
+
+

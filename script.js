@@ -1,6 +1,4 @@
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
+
 
 let targetArray = [
 "Picotin lock 18 bag",
@@ -12,6 +10,27 @@ let targetArray = [
 "Lindy mini bag"
 ]
 
+const nameCheckingTime = 10000;
+const loadNexgPageTime = 1924;
+const refreshTime = 13456;
+const doRefresh = true;
+const to = ''
+const apiEndpoint = ''
+const body = window.location.href
+
+let intervalId;
+if (window.location.host === "www.hermes.com") {
+    console.log('script started');
+    console.log('www.hermes.com found');
+    setTimeout (startChecking, nameCheckingTime)
+    intervalId = setInterval (loadNextPage, loadNexgPageTime) 
+    setTimeout (reload, refreshTime)
+}
+
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 function startChecking() {
     console.log('start checking')
@@ -26,10 +45,10 @@ function startChecking() {
         (value) => {
             if(targetArray.indexOf(value) >=0 ) {
                 console.error('target found',value)
-                let resp = axios.post('', {
-                to: '',
+                let resp = axios.post(apiEndpoint, {
+                to: to,
                 subject: '[hermes] ' + value +' found',
-                body: window.location.href
+                body: body
               });
             }
         }
@@ -50,16 +69,5 @@ function loadNextPage() {
 
 
 function reload() {
-    // window.location.reload()
+  if(doRefresh) window.location.reload()
 }
-
-let intervalId;
-if (window.location.host === "www.hermes.com") {
-    console.log('script started');
-    console.log('www.hermes.com found');
-    setTimeout (startChecking,10000)
-    intervalId = setInterval (loadNextPage,1942) 
-    setTimeout (reload,13456)
-}
-
-

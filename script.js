@@ -2,7 +2,15 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-let targetArray = ['Verrou 21 strap bag', `Sangle Zigzag 25 mm bag strap`]
+let targetArray = [
+"Picotin lock 18 bag",
+"Picotin lock 22 bag",
+"Lindy 26 bag",
+"Lindy 30 bag",
+"Garden party 30 bag",
+"Garden party 36 bag",
+"Lindy mini bag"
+]
 
 
 function startChecking() {
@@ -18,10 +26,9 @@ function startChecking() {
         (value) => {
             if(targetArray.indexOf(value) >=0 ) {
                 console.error('target found',value)
-                console.log('axiosaxios')
-                let resp = axios.post('api_endpoint', {
-                to: 'target email',
-                subject: value+' found',
+                let resp = axios.post('', {
+                to: '',
+                subject: '[hermes] ' + value +' found',
                 body: window.location.href
               });
             }
